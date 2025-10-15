@@ -3,7 +3,7 @@
 import { useAccount, useReadContract, useWriteContract, useWaitForTransactionReceipt } from "wagmi";
 import { AutomatedPayrollABI, getContractAddress } from "@/config/contracts";
 import { useEffect, useState } from "react";
-import { formatEther, parseEther } from "viem";
+import { formatEther } from "viem";
 import { useContractEvents } from "@/lib/useContractEvents";
 
 interface Employee {
@@ -77,7 +77,7 @@ export default function EmployeeList() {
         setSelectedEmployee((employeeList as string[])[0]);
       }
     }
-  }, [employeeList]);
+  }, [employeeList, selectedEmployee]);
 
   useEffect(() => {
     if (employeeInfo) {
