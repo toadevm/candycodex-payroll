@@ -70,7 +70,7 @@ export default function Header() {
                 {address?.slice(0, 6)}...{address?.slice(-4)}
               </button>
             ) : (
-              <appkit-button />
+              <div dangerouslySetInnerHTML={{ __html: '<appkit-button></appkit-button>' }} />
             )}
           </div>
         </div>

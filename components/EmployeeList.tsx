@@ -39,7 +39,7 @@ export default function EmployeeList() {
     functionName: "owner",
   });
 
-  const isOwner = userAddress && owner && userAddress.toLowerCase() === (owner as string).toLowerCase();
+  const isOwner: boolean = !!(userAddress && owner && userAddress.toLowerCase() === (owner as string).toLowerCase());
 
   // Get employee data
   const { data: employeeInfo } = useReadContract({

@@ -22,7 +22,7 @@ export default function AddEmployeeForm() {
     functionName: "owner",
   });
 
-  const isOwner = userAddress && owner && userAddress.toLowerCase() === (owner as string).toLowerCase();
+  const isOwner: boolean = !!(userAddress && owner && userAddress.toLowerCase() === (owner as string).toLowerCase());
 
   const { writeContract, data: hash, isPending, error } = useWriteContract();
   const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({ hash });

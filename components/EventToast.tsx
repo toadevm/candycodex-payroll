@@ -14,36 +14,37 @@ export default function EventToast() {
   useEffect(() => {
     if (latestEvent) {
       let msg = "";
+      const data = latestEvent.data as Record<string, unknown>;
 
       switch (latestEvent.type) {
         case "EmployeeAdded":
-          msg = `✅ Employee added: ${latestEvent.data.employeeAddress?.slice(0, 6)}...${latestEvent.data.employeeAddress?.slice(-4)}`;
+          msg = `✅ Employee added: ${(data.employeeAddress as string)?.slice(0, 6)}...${(data.employeeAddress as string)?.slice(-4)}`;
           break;
         case "EmployeeRemoved":
-          msg = `🗑️ Employee removed: ${latestEvent.data.employeeAddress?.slice(0, 6)}...${latestEvent.data.employeeAddress?.slice(-4)}`;
+          msg = `🗑️ Employee removed: ${(data.employeeAddress as string)?.slice(0, 6)}...${(data.employeeAddress as string)?.slice(-4)}`;
           break;
         case "EmployeeUpdated":
-          msg = `✏️ Employee updated: ${latestEvent.data.employeeAddress?.slice(0, 6)}...${latestEvent.data.employeeAddress?.slice(-4)}`;
+          msg = `✏️ Employee updated: ${(data.employeeAddress as string)?.slice(0, 6)}...${(data.employeeAddress as string)?.slice(-4)}`;
           break;
         case "PaymentExecuted":
-          const amount = latestEvent.data.amount ? formatEther(latestEvent.data.amount) : "0";
-          const token = latestEvent.data.tokenAddress === "0x0000000000000000000000000000000000000000" ? "ETH" : "Tokens";
-          msg = `💰 Payment executed: ${amount} ${token} to ${latestEvent.data.employeeAddress?.slice(0, 6)}...${latestEvent.data.employeeAddress?.slice(-4)}`;
+          const amount = data.amount ? formatEther(data.amount as bigint) : "0";
+          const token = data.tokenAddress === "0x0000000000000000000000000000000000000000" ? "ETH" : "Tokens";
+          msg = `💰 Payment executed: ${amount} ${token} to ${(data.employeeAddress as string)?.slice(0, 6)}...${(data.employeeAddress as string)?.slice(-4)}`;
           break;
         case "EmployeePaused":
-          msg = `⏸️ Employee paused: ${latestEvent.data.employeeAddress?.slice(0, 6)}...${latestEvent.data.employeeAddress?.slice(-4)}`;
+          msg = `⏸️ Employee paused: ${(data.employeeAddress as string)?.slice(0, 6)}...${(data.employeeAddress as string)?.slice(-4)}`;
           break;
         case "EmployeeResumed":
-          msg = `▶️ Employee resumed: ${latestEvent.data.employeeAddress?.slice(0, 6)}...${latestEvent.data.employeeAddress?.slice(-4)}`;
+          msg = `▶️ Employee resumed: ${(data.employeeAddress as string)?.slice(0, 6)}...${(data.employeeAddress as string)?.slice(-4)}`;
           break;
         case "FundsDeposited":
-          const depositAmount = latestEvent.data.amount ? formatEther(latestEvent.data.amount) : "0";
-          const depositToken = latestEvent.data.tokenAddress === "0x0000000000000000000000000000000000000000" ? "ETH" : "Tokens";
+          const depositAmount = data.amount ? formatEther(data.amount as bigint) : "0";
+          const depositToken = data.tokenAddress === "0x0000000000000000000000000000000000000000" ? "ETH" : "Tokens";
           msg = `💵 Funds deposited: ${depositAmount} ${depositToken}`;
           break;
         case "FundsWithdrawn":
-          const withdrawAmount = latestEvent.data.amount ? formatEther(latestEvent.data.amount) : "0";
-          const withdrawToken = latestEvent.data.tokenAddress === "0x0000000000000000000000000000000000000000" ? "ETH" : "Tokens";
+          const withdrawAmount = data.amount ? formatEther(data.amount as bigint) : "0";
+          const withdrawToken = data.tokenAddress === "0x0000000000000000000000000000000000000000" ? "ETH" : "Tokens";
           msg = `💸 Funds withdrawn: ${withdrawAmount} ${withdrawToken}`;
           break;
         case "Paused":

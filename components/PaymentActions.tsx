@@ -236,7 +236,7 @@ export default function PaymentActions() {
         </>
       )}
 
-      {allEmployees && (allEmployees as string[]).length > 0 && eligibleEmployees.length === 0 && (
+      {!!allEmployees && (allEmployees as string[]).length > 0 && eligibleEmployees.length === 0 && (
         <div className="rounded-md bg-blue-50 p-3">
           <p className="text-sm text-blue-800">
             You have {(allEmployees as string[]).length} employee(s), but none are eligible for payment right now.
