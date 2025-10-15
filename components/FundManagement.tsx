@@ -31,7 +31,7 @@ export default function FundManagement() {
     functionName: "getContractETHBalance",
   });
 
-  const isOwner = userAddress && owner && userAddress.toLowerCase() === (owner as string).toLowerCase();
+  const isOwner: boolean = !!(userAddress && owner && userAddress.toLowerCase() === (owner as string).toLowerCase());
 
   const { writeContract, data: hash, isPending } = useWriteContract();
   const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({ hash });
