@@ -1,12 +1,12 @@
 import { useWatchContractEvent } from "wagmi";
 import { AutomatedPayrollABI, getContractAddress } from "@/config/contracts";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export function useContractEvents(chainId: number | undefined) {
   const contractAddress = getContractAddress(chainId);
   const [latestEvent, setLatestEvent] = useState<{
     type: string;
-    data: any;
+    data: Record<string, unknown>;
     timestamp: number;
   } | null>(null);
 

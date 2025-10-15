@@ -58,7 +58,7 @@ export default function ContextProvider({
 
         // Store modal globally for easy access
         if (typeof window !== "undefined") {
-          (window as any).modal = modal;
+          (window as typeof window & { modal: typeof modal }).modal = modal;
         }
 
         modalInitialized = true;
