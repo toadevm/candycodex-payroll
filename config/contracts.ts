@@ -5,8 +5,8 @@ export const AutomatedPayrollABI = AutomatedPayrollArtifact.abi;
 
 // Contract addresses by chain ID
 export const CONTRACT_ADDRESSES: Record<number, `0x${string}`> = {
-  // Mainnet
-  1: "0x0000000000000000000000000000000000000000",
+  // Mainnet (Deployed: 2025-10-15)
+  1: "0x05675651f110b874ea270d434ad24ab07eb514f3",
   // Sepolia (Deployed: 2025-10-15)
   11155111: "0x386C10D7E4d76483896614FA912B477c08eEF17E",
   // Hardhat local
