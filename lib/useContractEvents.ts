@@ -19,7 +19,7 @@ export function useContractEvents(chainId: number | undefined) {
       logs.forEach((log) => {
         setLatestEvent({
           type: "EmployeeAdded",
-          data: log.args,
+          data: (log as { args?: Record<string, unknown> }).args || {},
           timestamp: Date.now(),
         });
       });
@@ -35,7 +35,7 @@ export function useContractEvents(chainId: number | undefined) {
       logs.forEach((log) => {
         setLatestEvent({
           type: "EmployeeRemoved",
-          data: log.args,
+          data: (log as { args?: Record<string, unknown> }).args || {},
           timestamp: Date.now(),
         });
       });
@@ -51,7 +51,7 @@ export function useContractEvents(chainId: number | undefined) {
       logs.forEach((log) => {
         setLatestEvent({
           type: "EmployeeUpdated",
-          data: log.args,
+          data: (log as { args?: Record<string, unknown> }).args || {},
           timestamp: Date.now(),
         });
       });
@@ -67,7 +67,7 @@ export function useContractEvents(chainId: number | undefined) {
       logs.forEach((log) => {
         setLatestEvent({
           type: "PaymentExecuted",
-          data: log.args,
+          data: (log as { args?: Record<string, unknown> }).args || {},
           timestamp: Date.now(),
         });
       });
@@ -83,7 +83,7 @@ export function useContractEvents(chainId: number | undefined) {
       logs.forEach((log) => {
         setLatestEvent({
           type: "EmployeePaused",
-          data: log.args,
+          data: (log as { args?: Record<string, unknown> }).args || {},
           timestamp: Date.now(),
         });
       });
@@ -99,7 +99,7 @@ export function useContractEvents(chainId: number | undefined) {
       logs.forEach((log) => {
         setLatestEvent({
           type: "EmployeeResumed",
-          data: log.args,
+          data: (log as { args?: Record<string, unknown> }).args || {},
           timestamp: Date.now(),
         });
       });
@@ -115,7 +115,7 @@ export function useContractEvents(chainId: number | undefined) {
       logs.forEach((log) => {
         setLatestEvent({
           type: "FundsDeposited",
-          data: log.args,
+          data: (log as { args?: Record<string, unknown> }).args || {},
           timestamp: Date.now(),
         });
       });
@@ -131,7 +131,7 @@ export function useContractEvents(chainId: number | undefined) {
       logs.forEach((log) => {
         setLatestEvent({
           type: "FundsWithdrawn",
-          data: log.args,
+          data: (log as { args?: Record<string, unknown> }).args || {},
           timestamp: Date.now(),
         });
       });
@@ -147,7 +147,7 @@ export function useContractEvents(chainId: number | undefined) {
       logs.forEach((log) => {
         setLatestEvent({
           type: "Paused",
-          data: log.args,
+          data: (log as { args?: Record<string, unknown> }).args || {},
           timestamp: Date.now(),
         });
       });
@@ -163,7 +163,7 @@ export function useContractEvents(chainId: number | undefined) {
       logs.forEach((log) => {
         setLatestEvent({
           type: "Unpaused",
-          data: log.args,
+          data: (log as { args?: Record<string, unknown> }).args || {},
           timestamp: Date.now(),
         });
       });
