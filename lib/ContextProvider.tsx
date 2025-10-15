@@ -53,6 +53,10 @@ export default function ContextProvider({
           themeVariables: {
             "--w3m-accent": "#3b82f6",
           },
+          features: {
+            email: false,
+            socials: [],
+          },
         });
 
         // Store modal globally for easy access
