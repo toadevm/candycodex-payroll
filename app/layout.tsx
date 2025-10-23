@@ -41,11 +41,27 @@ export default async function RootLayout({
             <TabNavigation />
             <EventToast />
             {children}
-            <footer className="mt-auto border-t-2 !border-purple-600 bg-white/95 backdrop-blur">
-              <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
-                <p className="text-center text-xs text-slate-600">
-                  Built with ❤️ by Candy Codex
-                </p>
+            <footer className="bg-gray-900 text-white mt-auto">
+              <div className="container mx-auto px-4 py-6">
+                <div className="flex flex-col sm:flex-row justify-between items-center text-xs sm:text-sm text-gray-400 gap-4 sm:gap-0">
+                  <p>
+                    © {new Date().getFullYear()} CandyCodex Payroll. All rights reserved.
+                  </p>
+                  <div className="flex space-x-3 sm:space-x-4">
+                    <a
+                      href="#"
+                      className="hover:text-white transition-colors"
+                    >
+                      Privacy Policy
+                    </a>
+                    <a
+                      href="#"
+                      className="hover:text-white transition-colors"
+                    >
+                      Terms of Service
+                    </a>
+                  </div>
+                </div>
               </div>
             </footer>
           </div>
