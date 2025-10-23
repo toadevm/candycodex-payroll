@@ -9,7 +9,7 @@ export default function Header() {
       <div className="container mx-auto px-4 py-4 sm:py-6">
         <div className="flex items-center justify-between flex-wrap gap-4">
           <Link href="/">
-            <h1 className="text-2xl tracking-wider sm:text-3xl font-bold cursor-pointer hover:opacity-90 transition-opacity">
+            <h1 className="text-2xl tracking-wider sm:text-3xl font-bold font-chewy cursor-pointer hover:opacity-90 transition-opacity">
               🍭 CandyCodex Payroll
             </h1>
           </Link>
