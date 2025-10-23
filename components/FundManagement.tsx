@@ -217,7 +217,7 @@ export default function FundManagement() {
             <button
               type="submit"
               disabled={isPending || isConfirming}
-              className="w-full rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50"
+              className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-md px-4 py-2 text-sm font-medium disabled:opacity-50"
             >
               {isPending || isConfirming ? "Processing..." : "Deposit"}
             </button>
@@ -252,7 +252,7 @@ export default function FundManagement() {
             <button
               type="submit"
               disabled={isPending || isConfirming}
-              className="w-full rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 disabled:opacity-50"
+              className="w-full bg-red-600 hover:bg-red-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-md px-4 py-2 text-sm font-medium disabled:opacity-50"
             >
               {isPending || isConfirming ? "Processing..." : "Withdraw"}
             </button>
@@ -272,7 +272,7 @@ export default function FundManagement() {
               setShowTokenDeposit(!showTokenDeposit);
               setShowTokenWithdraw(false);
             }}
-            className="w-full rounded-md bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200"
+            className="w-full bg-purple-100 text-purple-700 hover:bg-purple-200 shadow-lg hover:shadow-xl transition-all duration-300 rounded-md px-4 py-2 text-sm font-medium"
           >
             {showTokenDeposit ? "Hide" : "Show"} Token Deposit
           </button>
@@ -310,7 +310,7 @@ export default function FundManagement() {
               <button
                 type="submit"
                 disabled={isPending || isConfirming}
-                className="w-full rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50"
+                className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-md px-4 py-2 text-sm font-medium disabled:opacity-50"
               >
                 {isPending || isConfirming ? "Processing..." : "Deposit Tokens"}
               </button>
@@ -325,7 +325,7 @@ export default function FundManagement() {
               setShowTokenWithdraw(!showTokenWithdraw);
               setShowTokenDeposit(false);
             }}
-            className="w-full rounded-md bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200"
+            className="w-full bg-purple-100 text-purple-700 hover:bg-purple-200 shadow-lg hover:shadow-xl transition-all duration-300 rounded-md px-4 py-2 text-sm font-medium"
           >
             {showTokenWithdraw ? "Hide" : "Show"} Token Withdrawal
           </button>
@@ -363,7 +363,7 @@ export default function FundManagement() {
               <button
                 type="submit"
                 disabled={isPending || isConfirming}
-                className="w-full rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 disabled:opacity-50"
+                className="w-full bg-red-600 hover:bg-red-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-md px-4 py-2 text-sm font-medium disabled:opacity-50"
               >
                 {isPending || isConfirming ? "Processing..." : "Withdraw Tokens"}
               </button>

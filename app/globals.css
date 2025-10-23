@@ -25,11 +25,21 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Make all input and select text dark slate */
+/* Make all input and select text dark slate with purple borders */
 input,
 select,
 textarea {
   color: #1e293b !important;
+  border: 2px solid #9333ea !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #a855f7 !important;
+  outline: none !important;
+  ring: 2px !important;
+  ring-color: #a855f7 !important;
 }
 
 input::placeholder,

@@ -190,14 +190,14 @@ export default function SystemControls() {
           <button
             onClick={handlePauseAll}
             disabled={isPending || isConfirming || !!isPaused}
-            className="flex-1 rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 disabled:opacity-50"
+            className="flex-1 bg-red-600 hover:bg-red-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-md px-4 py-2 text-sm font-medium disabled:opacity-50"
           >
             {isPending || isConfirming ? "Processing..." : "Pause All Payments"}
           </button>
           <button
             onClick={handleResumeAll}
             disabled={isPending || isConfirming || !isPaused}
-            className="flex-1 rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700 disabled:opacity-50"
+            className="flex-1 bg-green-600 hover:bg-green-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-md px-4 py-2 text-sm font-medium disabled:opacity-50"
           >
             {isPending || isConfirming ? "Processing..." : "Resume All Payments"}
           </button>
@@ -271,7 +271,7 @@ export default function SystemControls() {
             <button
               type="submit"
               disabled={isPending || isConfirming}
-              className="w-full rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50"
+              className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-md px-4 py-2 text-sm font-medium disabled:opacity-50"
             >
               {isPending || isConfirming ? "Updating..." : "Update Employee"}
             </button>

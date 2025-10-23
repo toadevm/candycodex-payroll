@@ -162,13 +162,13 @@ export default function PaymentActions() {
               <div className="flex gap-2">
                 <button
                   onClick={selectAll}
-                  className="text-xs text-blue-600 hover:text-blue-700"
+                  className="text-xs bg-purple-100 text-purple-700 hover:bg-purple-200 px-2 py-1 rounded transition-all duration-300"
                 >
                   Select All
                 </button>
                 <button
                   onClick={clearSelection}
-                  className="text-xs text-gray-600 hover:text-gray-700"
+                  className="text-xs bg-purple-100 text-purple-700 hover:bg-purple-200 px-2 py-1 rounded transition-all duration-300"
                 >
                   Clear
                 </button>
@@ -195,7 +195,7 @@ export default function PaymentActions() {
                   <button
                     onClick={() => handleExecuteSingle(employee)}
                     disabled={isPending || isConfirming}
-                    className="rounded-md bg-green-600 px-3 py-1 text-xs font-medium text-white hover:bg-green-700 disabled:opacity-50"
+                    className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-md px-3 py-1 text-xs font-medium disabled:opacity-50"
                   >
                     Pay
                   </button>
@@ -208,7 +208,7 @@ export default function PaymentActions() {
             <button
               onClick={handleExecuteBatch}
               disabled={selectedEmployees.size === 0 || isPending || isConfirming}
-              className="rounded-lg bg-blue-600 px-4 py-3 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
+              className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-lg px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 disabled:opacity-50"
             >
               {isPending || isConfirming
                 ? "Processing..."
@@ -218,7 +218,7 @@ export default function PaymentActions() {
             <button
               onClick={handleExecuteAll}
               disabled={isPending || isConfirming}
-              className="rounded-lg bg-green-600 px-4 py-3 text-sm font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:opacity-50"
+              className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-lg px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 disabled:opacity-50"
             >
               {isPending || isConfirming
                 ? "Processing..."

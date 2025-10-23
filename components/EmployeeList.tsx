@@ -255,7 +255,7 @@ export default function EmployeeList() {
                     <button
                       onClick={handlePauseEmployee}
                       disabled={isPending || isConfirming}
-                      className="flex-1 rounded-md bg-yellow-600 px-3 py-2 text-xs font-medium text-white hover:bg-yellow-700 disabled:opacity-50"
+                      className="flex-1 bg-red-600 hover:bg-red-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-md px-3 py-2 text-xs font-medium disabled:opacity-50"
                     >
                       {isPending || isConfirming ? "Processing..." : "Pause"}
                     </button>
@@ -263,7 +263,7 @@ export default function EmployeeList() {
                     <button
                       onClick={handleResumeEmployee}
                       disabled={isPending || isConfirming}
-                      className="flex-1 rounded-md bg-green-600 px-3 py-2 text-xs font-medium text-white hover:bg-green-700 disabled:opacity-50"
+                      className="flex-1 bg-green-600 hover:bg-green-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-md px-3 py-2 text-xs font-medium disabled:opacity-50"
                     >
                       {isPending || isConfirming ? "Processing..." : "Resume"}
                     </button>
@@ -271,7 +271,7 @@ export default function EmployeeList() {
                   <button
                     onClick={handleRemoveEmployee}
                     disabled={isPending || isConfirming}
-                    className="flex-1 rounded-md bg-red-600 px-3 py-2 text-xs font-medium text-white hover:bg-red-700 disabled:opacity-50"
+                    className="flex-1 bg-red-600 hover:bg-red-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-md px-3 py-2 text-xs font-medium disabled:opacity-50"
                   >
                     {isPending || isConfirming ? "Processing..." : "Remove"}
                   </button>
