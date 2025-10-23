@@ -1,5 +1,4 @@
 import PaymentActions from "@/components/PaymentActions";
-import EmployeeList from "@/components/EmployeeList";
 
 export default function Home() {
   return (
@@ -11,19 +10,9 @@ export default function Home() {
         </p>
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-2">
-        {/* Left Column */}
-        <div className="space-y-4">
-          <div className="rounded-lg border-2 !border-purple-600 bg-white p-4 shadow-lg hover:shadow-xl transition-all duration-300">
-            <PaymentActions />
-          </div>
-        </div>
-
-        {/* Right Column */}
-        <div className="space-y-4">
-          <div className="rounded-lg border-2 !border-purple-600 bg-white p-4 shadow-lg hover:shadow-xl transition-all duration-300">
-            <EmployeeList />
-          </div>
+      <div className="max-w-4xl mx-auto">
+        <div className="rounded-lg border-2 !border-purple-600 bg-white p-4 shadow-lg hover:shadow-xl transition-all duration-300">
+          <PaymentActions />
         </div>
       </div>
     </main>
