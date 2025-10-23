@@ -1,10 +1,10 @@
 "use client";
 
 import { useAccount, useBalance, useDisconnect, useChainId } from "wagmi";
-import { useAppKit } from "@reown/appkit/react";
 import { formatEther } from "viem";
 import { Wallet, LogOut } from "lucide-react";
 import { NETWORK_NAMES } from "@/config/networks";
+import { useState, useEffect } from "react";
 
 export default function WalletConnection() {
   const { address, isConnected, connector } = useAccount();
@@ -13,14 +13,38 @@ export default function WalletConnection() {
     address,
   });
   const { disconnect } = useDisconnect();
-  const { open } = useAppKit();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const openModal = () => {
+    if (typeof window !== 'undefined' && (window as typeof window & { modal?: { open: (config?: { view?: string }) => void } }).modal) {
+      (window as typeof window & { modal: { open: (config?: { view?: string }) => void } }).modal.open();
+    }
+  };
+
+  const openNetworkModal = () => {
+    if (typeof window !== 'undefined' && (window as typeof window & { modal?: { open: (config?: { view?: string }) => void } }).modal) {
+      (window as typeof window & { modal: { open: (config?: { view?: string }) => void } }).modal.open({ view: 'Networks' });
+    }
+  };
+
+  if (!mounted) {
+    return (
+      <div className="flex justify-center gap-2">
+        <div className="h-12 sm:h-14 w-[150px] sm:w-[280px] animate-pulse rounded-lg bg-purple-200" />
+      </div>
+    );
+  }
 
   if (!isConnected) {
     return (
       <div className="flex justify-center gap-2">
         <button
           className="h-12 sm:h-14 px-2 sm:px-6 bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-200 hover:from-purple-100 hover:to-pink-100 min-w-[150px] sm:min-w-[280px] rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
-          onClick={() => open()}
+          onClick={openModal}
         >
           <div className="flex items-center justify-center w-full space-x-2 sm:space-x-3">
             <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center">
@@ -41,7 +65,7 @@ export default function WalletConnection() {
     <div className="flex justify-center gap-2">
       <button
         className="h-12 sm:h-14 px-2 sm:px-3 bg-gradient-to-r from-blue-50 to-purple-50 border-2 border-blue-200 hover:from-blue-100 hover:to-purple-100 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
-        onClick={() => open({ view: 'Networks' })}
+        onClick={openNetworkModal}
       >
         <div className="flex items-center gap-1 sm:gap-2">
           <span className="text-xs sm:text-sm font-medium text-gray-900">
