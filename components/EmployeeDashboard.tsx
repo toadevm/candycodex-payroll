@@ -18,18 +18,27 @@ interface Employee {
 }
 
 export default function EmployeeDashboard() {
-  const { chain, isConnected } = useAccount();
+  const { chain, isConnected, address: userAddress } = useAccount();
   const contractAddress = getContractAddress(chain?.id);
   const { latestEvent } = useContractEvents(chain?.id);
   const [mounted, setMounted] = useState(false);
   const [employees, setEmployees] = useState<string[]>([]);
   const [employeeNames, setEmployeeNames] = useState<Record<string, string>>({});
+  const [isEmployee, setIsEmployee] = useState<boolean>(false);
+  const [isOwner, setIsOwner] = useState<boolean>(false);
 
   // Read all employees
   const { data: employeeList, refetch: refetchEmployees } = useReadContract({
     address: contractAddress,
     abi: AutomatedPayrollABI,
     functionName: "getAllEmployees",
+  });
+
+  // Check if user is owner
+  const { data: owner } = useReadContract({
+    address: contractAddress,
+    abi: AutomatedPayrollABI,
+    functionName: "owner",
   });
 
   const { writeContract, data: hash, isPending } = useWriteContract();
@@ -47,9 +56,23 @@ export default function EmployeeDashboard() {
 
   useEffect(() => {
     if (employeeList && Array.isArray(employeeList)) {
-      setEmployees(employeeList as string[]);
+      const empList = employeeList as string[];
+      setEmployees(empList);
+
+      // Check if connected wallet is in employee list
+      if (userAddress) {
+        const isEmp = empList.some(emp => emp.toLowerCase() === userAddress.toLowerCase());
+        setIsEmployee(isEmp);
+      }
     }
-  }, [employeeList]);
+  }, [employeeList, userAddress]);
+
+  useEffect(() => {
+    // Check if user is owner
+    if (userAddress && owner) {
+      setIsOwner(userAddress.toLowerCase() === (owner as string).toLowerCase());
+    }
+  }, [userAddress, owner]);
 
   // Fetch employee details for each employee
   useEffect(() => {
@@ -118,6 +141,41 @@ export default function EmployeeDashboard() {
     );
   }
 
+  // Show message for connected wallets that are not employees or admin
+  if (isConnected && !isEmployee && !isOwner && mounted) {
+    return (
+      <div className="max-w-2xl mx-auto mt-12">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4 font-chewy">
+            Welcome to Candy Codex Developers Portal
+          </h1>
+          <p className="text-lg text-gray-600 mb-6 font-dynapuff">
+            Your wallet is connected
+          </p>
+        </div>
+
+        <div className="bg-yellow-50 border-2 border-yellow-200 rounded-lg p-6 text-center">
+          <div className="text-4xl mb-3">⚠️</div>
+          <h2 className="text-xl font-bold text-yellow-900 mb-2">
+            Not an Eligible Employee
+          </h2>
+          <p className="text-yellow-800 mb-4">
+            Your wallet address is not registered as an employee in this payroll system.
+          </p>
+          <div className="bg-white rounded-md p-3 mb-4">
+            <p className="text-xs text-gray-500 mb-1">Your Wallet Address</p>
+            <code className="text-sm font-mono text-gray-900 break-all">
+              {userAddress}
+            </code>
+          </div>
+          <p className="text-sm text-yellow-700">
+            Please contact your administrator if you believe this is an error.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   if (!contractAddress) {
     return (
       <div className="text-center py-12">
@@ -139,9 +197,14 @@ export default function EmployeeDashboard() {
     );
   }
 
+  // Filter employees based on user role
+  const displayEmployees = isOwner
+    ? employees // Admin sees all employees
+    : employees.filter(emp => emp.toLowerCase() === userAddress?.toLowerCase()); // Employee sees only themselves
+
   return (
     <div className="space-y-4">
-      {employees.map((empAddress) => (
+      {displayEmployees.map((empAddress) => (
         <EmployeeRow
           key={empAddress}
           employeeAddress={empAddress}
