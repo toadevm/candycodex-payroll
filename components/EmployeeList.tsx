@@ -24,6 +24,7 @@ export default function EmployeeList() {
   const [employees, setEmployees] = useState<string[]>([]);
   const [selectedEmployee, setSelectedEmployee] = useState<string | null>(null);
   const [employeeData, setEmployeeData] = useState<Employee | null>(null);
+  const [employeeNames, setEmployeeNames] = useState<Record<string, string>>({});
 
   // Read all employees
   const { data: employeeList, refetch: refetchEmployees } = useReadContract({
@@ -68,6 +69,12 @@ export default function EmployeeList() {
 
   useEffect(() => {
     setMounted(true);
+
+    // Fetch employee names from API
+    fetch("/api/employee-names")
+      .then((res) => res.json())
+      .then((data) => setEmployeeNames(data))
+      .catch((error) => console.error("Error fetching employee names:", error));
   }, []);
 
   useEffect(() => {
@@ -191,7 +198,9 @@ export default function EmployeeList() {
             >
               {employees.map((emp) => (
                 <option key={emp} value={emp}>
-                  {emp.slice(0, 6)}...{emp.slice(-4)}
+                  {employeeNames[emp.toLowerCase()]
+                    ? `${employeeNames[emp.toLowerCase()]} (${emp.slice(0, 6)}...${emp.slice(-4)})`
+                    : `${emp.slice(0, 6)}...${emp.slice(-4)}`}
                 </option>
               ))}
             </select>
@@ -203,6 +212,14 @@ export default function EmployeeList() {
                 Employee Details
               </h3>
               <dl className="space-y-2 text-sm">
+                {employeeNames[selectedEmployee.toLowerCase()] && (
+                  <div>
+                    <dt className="font-medium text-gray-500">Name</dt>
+                    <dd className="mt-1 text-gray-900 font-semibold">
+                      {employeeNames[selectedEmployee.toLowerCase()]}
+                    </dd>
+                  </div>
+                )}
                 <div>
                   <dt className="font-medium text-gray-500">Address</dt>
                   <dd className="mt-1 text-gray-900 break-all">{selectedEmployee}</dd>

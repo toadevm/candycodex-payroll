@@ -11,6 +11,7 @@ export default function AddEmployeeForm() {
 
   const [mounted, setMounted] = useState(false);
   const [employeeAddress, setEmployeeAddress] = useState("");
+  const [employeeName, setEmployeeName] = useState("");
   const [paymentAmount, setPaymentAmount] = useState("");
   const [intervalDays, setIntervalDays] = useState("30");
   const [useToken, setUseToken] = useState(false);
@@ -32,15 +33,30 @@ export default function AddEmployeeForm() {
   }, []);
 
   useEffect(() => {
-    if (isConfirmed) {
+    if (isConfirmed && hash) {
+      // Save employee name to database if provided
+      if (employeeName.trim()) {
+        fetch("/api/employee-names", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            address: employeeAddress,
+            name: employeeName.trim(),
+          }),
+        }).catch((error) => {
+          console.error("Failed to save employee name:", error);
+        });
+      }
+
       // Reset form on success
       setEmployeeAddress("");
+      setEmployeeName("");
       setPaymentAmount("");
       setIntervalDays("30");
       setTokenAddress("");
       setUseToken(false);
     }
-  }, [isConfirmed]);
+  }, [isConfirmed, hash, employeeAddress, employeeName]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -140,6 +156,27 @@ export default function AddEmployeeForm() {
             className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             required
           />
+        </div>
+
+        <div>
+          <label
+            htmlFor="employeeName"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Employee Name (Optional)
+          </label>
+          <input
+            type="text"
+            id="employeeName"
+            value={employeeName}
+            onChange={(e) => setEmployeeName(e.target.value)}
+            placeholder="e.g., John Doe"
+            maxLength={100}
+            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          />
+          <p className="mt-1 text-xs text-gray-500">
+            Add a friendly name to identify this employee
+          </p>
         </div>
 
         <div className="flex items-center rounded-md border border-gray-200 bg-gray-50 p-3">

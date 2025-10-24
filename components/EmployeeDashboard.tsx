@@ -23,6 +23,7 @@ export default function EmployeeDashboard() {
   const { latestEvent } = useContractEvents(chain?.id);
   const [mounted, setMounted] = useState(false);
   const [employees, setEmployees] = useState<string[]>([]);
+  const [employeeNames, setEmployeeNames] = useState<Record<string, string>>({});
 
   // Read all employees
   const { data: employeeList, refetch: refetchEmployees } = useReadContract({
@@ -36,6 +37,12 @@ export default function EmployeeDashboard() {
 
   useEffect(() => {
     setMounted(true);
+
+    // Fetch employee names from API
+    fetch("/api/employee-names")
+      .then((res) => res.json())
+      .then((data) => setEmployeeNames(data))
+      .catch((error) => console.error("Error fetching employee names:", error));
   }, []);
 
   useEffect(() => {
@@ -138,6 +145,7 @@ export default function EmployeeDashboard() {
         <EmployeeRow
           key={empAddress}
           employeeAddress={empAddress}
+          employeeName={employeeNames[empAddress.toLowerCase()]}
           contractAddress={contractAddress}
           onWithdraw={handleWithdraw}
           isPending={isPending}
@@ -151,12 +159,14 @@ export default function EmployeeDashboard() {
 // Separate component for each employee row to handle individual reads
 function EmployeeRow({
   employeeAddress,
+  employeeName,
   contractAddress,
   onWithdraw,
   isPending,
   isConfirming
 }: {
   employeeAddress: string;
+  employeeName?: string;
   contractAddress: `0x${string}`;
   onWithdraw: (address: string) => void;
   isPending: boolean;
@@ -194,6 +204,14 @@ function EmployeeRow({
   return (
     <div className="border-2 border-dashed !border-purple-600 hover:!border-purple-500 rounded-lg p-6 hover:shadow-lg transition-all duration-300 bg-white">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Employee Name */}
+        {employeeName && (
+          <div>
+            <p className="text-xs font-semibold text-gray-700 mb-2">Employee Name</p>
+            <p className="text-base font-bold text-purple-600">{employeeName}</p>
+          </div>
+        )}
+
         {/* Employee Address */}
         <div>
           <p className="text-xs font-semibold text-gray-700 mb-2">Employee Address</p>
