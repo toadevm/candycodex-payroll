@@ -177,21 +177,21 @@ export default function EmployeeDashboard() {
           </p>
         </div>
 
-        <div className="bg-yellow-50 border-2 border-yellow-200 rounded-lg p-6 text-center">
-          <div className="text-4xl mb-3">⚠️</div>
-          <h2 className="text-xl font-bold text-yellow-900 mb-2">
+        <div className="bg-gradient-to-br from-purple-50 to-pink-50 border-2 border-dashed border-purple-400 rounded-lg p-8 text-center">
+          <div className="text-5xl mb-4">⚠️</div>
+          <h2 className="text-2xl font-bold text-purple-900 mb-3 font-chewy">
             Not an Eligible Employee
           </h2>
-          <p className="text-yellow-800 mb-4">
+          <p className="text-purple-800 mb-6 font-dynapuff">
             Your wallet address is not registered as an employee in this payroll system.
           </p>
-          <div className="bg-white rounded-md p-3 mb-4">
-            <p className="text-xs text-gray-500 mb-1">Your Wallet Address</p>
-            <code className="text-sm font-mono text-gray-900 break-all">
+          <div className="bg-white rounded-lg border-2 border-purple-200 p-4 mb-6">
+            <p className="text-xs font-semibold text-purple-700 mb-2">Your Wallet Address</p>
+            <code className="text-sm font-mono text-gray-900 break-all block">
               {userAddress}
             </code>
           </div>
-          <p className="text-sm text-yellow-700">
+          <p className="text-sm text-purple-700 font-dynapuff">
             Please contact your administrator if you believe this is an error.
           </p>
         </div>
