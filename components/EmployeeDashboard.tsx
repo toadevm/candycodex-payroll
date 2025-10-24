@@ -141,7 +141,30 @@ export default function EmployeeDashboard() {
     );
   }
 
+  if (!contractAddress) {
+    return (
+      <div className="text-center py-12">
+        <div className="max-w-xl mx-auto bg-red-50 rounded-lg p-6 border-2 border-red-200">
+          <p className="text-red-700 font-semibold text-lg mb-2">Contract Not Available</p>
+          <p className="text-red-600 text-sm">
+            The payroll contract is not deployed on this network. Please switch to Ethereum Mainnet or Sepolia testnet.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  // Wait for employee list to load before checking eligibility
+  if (employees.length === 0) {
+    return (
+      <div className="text-center py-12">
+        <p className="text-gray-600">Loading employee data...</p>
+      </div>
+    );
+  }
+
   // Show message for connected wallets that are not employees or admin
+  // Check AFTER employees list is loaded
   if (isConnected && !isEmployee && !isOwner && mounted) {
     return (
       <div className="max-w-2xl mx-auto mt-12">
@@ -172,27 +195,6 @@ export default function EmployeeDashboard() {
             Please contact your administrator if you believe this is an error.
           </p>
         </div>
-      </div>
-    );
-  }
-
-  if (!contractAddress) {
-    return (
-      <div className="text-center py-12">
-        <div className="max-w-xl mx-auto bg-red-50 rounded-lg p-6 border-2 border-red-200">
-          <p className="text-red-700 font-semibold text-lg mb-2">Contract Not Available</p>
-          <p className="text-red-600 text-sm">
-            The payroll contract is not deployed on this network. Please switch to Ethereum Mainnet or Sepolia testnet.
-          </p>
-        </div>
-      </div>
-    );
-  }
-
-  if (employees.length === 0) {
-    return (
-      <div className="text-center py-12">
-        <p className="text-gray-600">No employees registered in the system</p>
       </div>
     );
   }
