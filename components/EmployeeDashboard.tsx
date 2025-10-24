@@ -168,54 +168,54 @@ function EmployeeRow({
   };
 
   return (
-    <div className="border-2 border-dashed !border-purple-600 hover:!border-purple-500 rounded-lg p-4 hover:shadow-lg transition-all duration-300 bg-white">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="border-2 border-dashed !border-purple-600 hover:!border-purple-500 rounded-lg p-6 hover:shadow-lg transition-all duration-300 bg-white">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {/* Employee Address */}
         <div>
-          <p className="text-xs text-gray-500 mb-1">Employee Address</p>
-          <code className="text-xs bg-gray-100 px-2 py-1 rounded font-mono">
+          <p className="text-xs font-semibold text-gray-700 mb-2">Employee Address</p>
+          <code className="text-sm bg-gray-100 px-2 py-1 rounded font-mono text-gray-900 block">
             {employeeAddress.slice(0, 6)}...{employeeAddress.slice(-4)}
           </code>
         </div>
 
         {/* Payment Amount */}
         <div>
-          <p className="text-xs text-gray-500 mb-1">Payment Amount</p>
-          <p className="font-semibold text-green-600">
+          <p className="text-xs font-semibold text-gray-700 mb-2">Payment Amount</p>
+          <p className="font-bold text-base text-green-600">
             {formatEther(employee.paymentAmount)} {employee.tokenAddress === "0x0000000000000000000000000000000000000000" ? "ETH" : "TOKEN"}
           </p>
         </div>
 
         {/* Payment Interval */}
         <div>
-          <p className="text-xs text-gray-500 mb-1">Payment Interval</p>
-          <p className="font-medium">{employee.paymentIntervalDays.toString()} days</p>
+          <p className="text-xs font-semibold text-gray-700 mb-2">Payment Interval</p>
+          <p className="font-semibold text-base text-gray-900">{employee.paymentIntervalDays.toString()} days</p>
         </div>
 
         {/* Status */}
         <div>
-          <p className="text-xs text-gray-500 mb-1">Status</p>
-          <span className={`inline-block px-2 py-1 rounded text-xs font-medium ${employee.isActive ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+          <p className="text-xs font-semibold text-gray-700 mb-2">Status</p>
+          <span className={`inline-block px-3 py-1 rounded text-sm font-semibold ${employee.isActive ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
             {employee.isActive ? "Active" : "Paused"}
           </span>
         </div>
 
         {/* Last Payment */}
         <div>
-          <p className="text-xs text-gray-500 mb-1">Last Payment</p>
-          <p className="text-sm">{formatDate(employee.lastPaymentTimestamp)}</p>
+          <p className="text-xs font-semibold text-gray-700 mb-2">Last Payment</p>
+          <p className="text-sm font-medium text-gray-900">{formatDate(employee.lastPaymentTimestamp)}</p>
         </div>
 
         {/* Next Payment Due */}
         <div>
-          <p className="text-xs text-gray-500 mb-1">Next Payment Due</p>
-          <p className="text-sm">{formatNextPaymentDate(employee.lastPaymentTimestamp, employee.paymentIntervalDays)}</p>
+          <p className="text-xs font-semibold text-gray-700 mb-2">Next Payment Due</p>
+          <p className="text-sm font-medium text-gray-900">{formatNextPaymentDate(employee.lastPaymentTimestamp, employee.paymentIntervalDays)}</p>
         </div>
 
         {/* Eligibility */}
         <div>
-          <p className="text-xs text-gray-500 mb-1">Eligible</p>
-          <span className={`inline-block px-2 py-1 rounded text-xs font-medium ${eligible ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-700'}`}>
+          <p className="text-xs font-semibold text-gray-700 mb-2">Eligible</p>
+          <span className={`inline-block px-3 py-1 rounded text-sm font-semibold ${eligible ? 'bg-blue-100 text-blue-800' : 'bg-gray-200 text-gray-800'}`}>
             {eligible ? "Yes - Due Now" : "Not Yet"}
           </span>
         </div>
@@ -225,10 +225,10 @@ function EmployeeRow({
           <button
             onClick={() => onWithdraw(employeeAddress)}
             disabled={!eligible || !employee.isActive || isPending || isConfirming}
-            className={`w-full py-2 px-4 rounded-lg font-medium text-sm transition-all duration-300 ${
+            className={`w-full py-2 px-4 rounded-lg font-semibold text-sm transition-all duration-300 ${
               eligible && employee.isActive && !isPending && !isConfirming
                 ? 'bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white shadow-lg hover:shadow-xl'
-                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                : 'bg-gray-300 text-gray-600 cursor-not-allowed'
             }`}
           >
             {isPending || isConfirming ? 'Processing...' : eligible && employee.isActive ? 'Withdraw' : 'Not Due'}
