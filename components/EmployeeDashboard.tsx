@@ -18,7 +18,7 @@ interface Employee {
 }
 
 export default function EmployeeDashboard() {
-  const { chain } = useAccount();
+  const { chain, isConnected } = useAccount();
   const contractAddress = getContractAddress(chain?.id);
   const { latestEvent } = useContractEvents(chain?.id);
   const [mounted, setMounted] = useState(false);
@@ -92,10 +92,36 @@ export default function EmployeeDashboard() {
     );
   }
 
+  if (!isConnected) {
+    return (
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <div className="text-center max-w-2xl px-4">
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            Welcome to Candy Codex Developers Portal
+          </h2>
+          <p className="text-xl text-gray-700 mb-6">
+            Connect your wallet to view and manage automated payroll payments
+          </p>
+          <p className="text-base text-gray-600 leading-relaxed">
+            This decentralized application enables automated recurring payments for employees.
+            Employees can view their payment schedules and withdraw funds when eligible.
+            Administrators can manage employee records, fund the contract, and control payment settings.
+            All transactions are transparent and recorded on the blockchain.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   if (!contractAddress) {
     return (
       <div className="text-center py-12">
-        <p className="text-red-600">Contract not deployed on this network</p>
+        <div className="max-w-xl mx-auto bg-red-50 rounded-lg p-6 border-2 border-red-200">
+          <p className="text-red-700 font-semibold text-lg mb-2">Contract Not Available</p>
+          <p className="text-red-600 text-sm">
+            The payroll contract is not deployed on this network. Please switch to Ethereum Mainnet or Sepolia testnet.
+          </p>
+        </div>
       </div>
     );
   }
