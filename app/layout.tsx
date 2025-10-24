@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Chewy } from "next/font/google";
+import { Geist, Geist_Mono, Chewy, DynaPuff } from "next/font/google";
 import { cookies } from "next/headers";
 import "./globals.css";
 import ContextProvider from "@/lib/ContextProvider";
@@ -23,6 +23,11 @@ const chewy = Chewy({
   variable: "--font-chewy",
 });
 
+const dynapuff = DynaPuff({
+  subsets: ["latin"],
+  variable: "--font-dynapuff",
+});
+
 export const metadata: Metadata = {
   title: "CandyCodex Payroll - Blockchain Payroll Management",
   description: "Professional blockchain-based payroll system for managing employee payments with cryptocurrency",
@@ -39,7 +44,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${chewy.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${chewy.variable} ${dynapuff.variable} antialiased`}
       >
         <ContextProvider cookies={cookieString}>
           <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-purple-50 flex flex-col">

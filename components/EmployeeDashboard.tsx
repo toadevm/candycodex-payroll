@@ -94,21 +94,19 @@ export default function EmployeeDashboard() {
 
   if (!isConnected) {
     return (
-      <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="text-center max-w-2xl px-4">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            Welcome to Candy Codex Developers Portal
-          </h2>
-          <p className="text-xl text-gray-700 mb-6">
-            Connect your wallet to view and manage automated payroll payments
-          </p>
-          <p className="text-base text-gray-600 leading-relaxed">
-            This decentralized application enables automated recurring payments for employees.
-            Employees can view their payment schedules and withdraw funds when eligible.
-            Administrators can manage employee records, fund the contract, and control payment settings.
-            All transactions are transparent and recorded on the blockchain.
-          </p>
-        </div>
+      <div className="max-w-2xl mx-auto mt-12 text-center">
+        <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4 font-chewy">
+          Welcome to Candy Codex Developers Portal
+        </h1>
+        <p className="text-lg text-gray-600 mb-6 font-dynapuff">
+          Connect your wallet to view and manage automated payroll payments
+        </p>
+        <p className="text-base text-gray-500 font-dynapuff">
+          This decentralized application enables automated recurring payments for employees.
+          Employees can view their payment schedules and withdraw funds when eligible.
+          Administrators can manage employee records, fund the contract, and control payment settings.
+          All transactions are transparent and recorded on the blockchain.
+        </p>
       </div>
     );
   }
